@@ -5,8 +5,8 @@
 #PBS -e /storage/brno2/home/horkyvl/job_logs
 #PBS -o /storage/brno2/home/horkyvl/job_logs
 
-DATADIR=/storage/brno2/home/horkyvl/data/ai_games/super-mario-astar-master
-RESULTDIR=/storage/brno2/home/horkyvl/results
+DATADIR=/storage/brno2/home/horkyvl/repo/super-mario-meta
+RESULTDIR=/storage/brno2/home/horkyvl/results/astar
 ROOT=/storage/brno2/home/horkyvl
 
 echo "$PBS_JOBID is running on node `hostname -f` in a scratch directory $SCRATCHDIR" >> $DATADIR/jobs_info.txt
