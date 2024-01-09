@@ -65,15 +65,10 @@ plt.ylabel("Search Steps")
 plt.title("Average Win Rate Dependence on Parameters")
 plt.show()
 
-# Plot average run time heatmap with numeric values
+# Plot average run time heatmap without numeric values
 plt.figure(figsize=(8, 6))
 cax = plt.imshow(run_time_data, cmap="viridis", aspect="auto", origin="lower", interpolation="nearest")
 plt.colorbar(label="Average Run Time (ms)")
-
-# Add text annotations to the heatmap cells
-for i in range(len(search_steps)):
-    for j in range(len(time_to_finish_weight)):
-        plt.text(j, i, f'{run_time_data[i, j]:.2f}', ha='center', va='center', color='w')
 
 plt.xticks(np.arange(len(time_to_finish_weight)), time_to_finish_weight)
 plt.yticks(np.arange(len(search_steps)), search_steps)
@@ -81,6 +76,7 @@ plt.xlabel("Time to Finish Weight")
 plt.ylabel("Search Steps")
 plt.title("Average Run Time Dependence on Parameters")
 plt.show()
+
 
 
 
