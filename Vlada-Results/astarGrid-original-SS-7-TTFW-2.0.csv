@@ -1,0 +1,18 @@
+SS:7
+TTFW:2.0
+level,win/fail,% travelled,run time,game ticks,planning time,total plannings,nodes evaluated,most backtracked nodes
+Mario-1,true,1.00,51,448,15,1,67,1
+Mario-2,true,1.00,380,479,339,9,828,33
+Mario-3,true,1.00,83,411,33,1,142,36
+Mario-4,false,0.95,218641,6666,218548,6666,5184513,571
+Mario-5,true,1.00,975,613,915,25,959,94
+Mario-6,true,1.00,161,342,143,4,537,63
+Mario-7,true,1.00,465,604,421,12,2353,288
+Mario-8,true,1.00,820,491,774,24,8782,365
+Mario-9,true,1.00,101,434,50,2,137,21
+Mario-10,true,1.00,138,455,121,3,588,73
+Mario-11,true,1.00,641,641,583,16,2296,106
+Mario-12,true,1.00,152,916,71,2,590,104
+Mario-13,true,1.00,17,383,7,1,96,10
+Mario-14,true,1.00,52,537,23,1,114,16
+Mario-15,true,1.00,2580,1202,2540,75,34946,297
