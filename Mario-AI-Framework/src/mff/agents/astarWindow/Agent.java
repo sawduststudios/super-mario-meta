@@ -2,19 +2,21 @@ package mff.agents.astarWindow;
 
 import mff.agents.astarHelper.MarioAction;
 import mff.agents.benchmark.IAgentBenchmark;
+import mff.agents.benchmark.IAgentBenchmarkBacktrack;
 import mff.agents.common.IMarioAgentMFF;
 import mff.agents.common.MarioTimerSlim;
 import mff.forwardmodel.slim.core.MarioForwardModelSlim;
 
 import java.util.ArrayList;
 
-public class Agent implements IMarioAgentMFF, IAgentBenchmark {
+public class Agent implements IMarioAgentMFF, IAgentBenchmark, IAgentBenchmarkBacktrack {
 
     private ArrayList<boolean[]> actionsList = new ArrayList<>();
     private float furthestDistance = -1;
     private boolean finished = false;
     private int totalSearchCalls = 0;
     private int totalNodesEvaluated = 0;
+    private int mostBacktrackedNodes = 0;
 
     @Override
     public void initialize(MarioForwardModelSlim model) {
@@ -35,6 +37,7 @@ public class Agent implements IMarioAgentMFF, IAgentBenchmark {
         ArrayList<boolean[]> newActionsList = tree.search(timer);
         totalSearchCalls++;
         this.totalNodesEvaluated += tree.nodesEvaluated;
+        this.mostBacktrackedNodes = Math.max(tree.mostBacktrackedNodes, this.mostBacktrackedNodes);
 
         if (AStarTree.winFound) {
             actionsList = newActionsList;
@@ -67,5 +70,10 @@ public class Agent implements IMarioAgentMFF, IAgentBenchmark {
     @Override
     public String getAgentName() {
         return "MFF AStar Agent";
+    }
+
+    @Override
+    public int getMostBacktrackedNodes() {
+        return mostBacktrackedNodes;
     }
 }

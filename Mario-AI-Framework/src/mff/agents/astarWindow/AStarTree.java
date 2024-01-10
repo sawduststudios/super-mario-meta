@@ -30,6 +30,8 @@ public class AStarTree {
     public static int RIGHT_WINDOW_BORDER_X = 176;
 
     public int nodesEvaluated = 0;
+    public int mostBacktrackedNodes = 0;
+    private int nodesBeforeNewFarthestX = 0;
 
     PriorityQueue<SearchNode> opened = new PriorityQueue<>(new CompareByCost());
     /**
@@ -98,6 +100,11 @@ public class AStarTree {
             if (current.state.getMarioX() > furthestNodeDistance) {
                 furthestNode = current;
                 furthestNodeDistance = current.state.getMarioX();
+                mostBacktrackedNodes = Math.max(nodesBeforeNewFarthestX, mostBacktrackedNodes);
+                nodesBeforeNewFarthestX = 0;
+            }
+            else {
+                nodesBeforeNewFarthestX++;
             }
 
             if (current.state.getMarioX() >= rightWindowBorderX && isSafe(current)) { // right window border reached and position is safe
