@@ -44,7 +44,7 @@ public class AgentBenchmarkMetacentrum {
         add("krys");
         // add("ge");
         // add("hopper");
-        // add("notch");
+        add("notch");
         // add("notchParam");
         // add("notchParamRand");
         // add("ore");
@@ -102,7 +102,7 @@ public class AgentBenchmarkMetacentrum {
     private static void testFrameworkLevels(String agentType, FileWriter log, String levelsName) throws IOException {
         AgentStats agentStats;
         if (!agentType.equals("robinBaumgarten")) {
-            for (int i = 1; i <= 16; i++) {
+            for (int i = 1; i <= 100; i++) {
                 System.out.println(agentType + "-" + levelsName + "-" + i);
                 String level = getLevel("./levels/" + levelsName + "/lvl-" + i + ".txt");
                 AgentBenchmarkGame game = new AgentBenchmarkGame();
@@ -116,7 +116,7 @@ public class AgentBenchmarkMetacentrum {
             }
         }
         else {
-            for (int i = 1; i <= 16; i++) {
+            for (int i = 1; i <= 100; i++) {
                 System.out.println(agentType + "-" + levelsName + "-" + i);
                 String level = getLevel("./levels/" + levelsName + "/lvl-" + i + ".txt");
                 OriginalAgentBenchmarkGame game = new OriginalAgentBenchmarkGame();
@@ -132,7 +132,7 @@ public class AgentBenchmarkMetacentrum {
     private static void testKrysLevels(String agentType, FileWriter log) throws IOException {
         AgentStats agentStats;
         if (!agentType.equals("robinBaumgarten")) {
-            for (int i = 1; i <= 16; i++) {
+            for (int i = 1; i <= 100; i++) {
                 System.out.println(agentType + "-" + "krys" + "-" + i);
                 String level = getLevel("./levels/krys/lvl-" + i + ".txt");
                 AgentBenchmarkGame game = new AgentBenchmarkGame();
@@ -146,7 +146,7 @@ public class AgentBenchmarkMetacentrum {
             }
         }
         else {
-            for (int i = 1; i <= 16; i++) {
+            for (int i = 1; i <= 100; i++) {
                 System.out.println(agentType + "-" + "krys" + "-" + i);
                 MarioLevelGenerator generator = new levelGenerators.krys.LevelGenerator(i);
                 String level = generator.getGeneratedLevel(new MarioLevelModel(150, 16),
