@@ -4,7 +4,8 @@ import engine.core.MarioAgent;
 import engine.core.MarioLevelGenerator;
 import engine.core.MarioLevelModel;
 import engine.core.MarioTimer;
-import mff.agents.astarGrid.AStarTree;
+// import mff.agents.astarGrid.AStarTree;
+import mff.agents.astarWindow.AStarTree;
 import mff.agents.common.IGridHeuristic;
 import mff.agents.common.IMarioAgentMFF;
 
@@ -34,8 +35,8 @@ public class AgentBenchmarkMetacentrum {
 //        add("robinBaumgartenSlimWindowAdvance");
 //        add("astar");
 //        add("astarPlanningDynamic");
-//        add("astarWindow");
-        add("astarGrid");
+       add("astarWindow");
+        // add("astarGrid");
     }};
 
     private static final ArrayList<String> levels = new ArrayList<>() {{
@@ -56,7 +57,9 @@ public class AgentBenchmarkMetacentrum {
         
         try {
             AStarTree.SEARCH_STEPS = Integer.parseInt(args[0]);
-            AStarTree.TIME_TO_FINISH_WEIGHT = Float.parseFloat(args[1]);
+            AStarTree.RIGHT_WINDOW_BORDER_X = Integer.parseInt(args[1]);
+            // AStarTree.TIME_TO_FINISH_WEIGHT = Float.parseFloat(args[1]);
+
             // AStarTree.NODE_DEPTH_WEIGHT = Float.parseFloat(args[0]);
             // AStarTree.TIME_TO_FINISH_WEIGHT = Float.parseFloat(args[1]);
             // AStarTree.DISTANCE_FROM_PATH_TOLERANCE = Float.parseFloat(args[2]);
@@ -70,7 +73,7 @@ public class AgentBenchmarkMetacentrum {
             for (String level : levels) {
                 File log = prepareLog("agent-benchmark" + File.separator + agentType + "-" + level
                         + "-SS-" + AStarTree.SEARCH_STEPS
-                        + "-TTFW-" + AStarTree.TIME_TO_FINISH_WEIGHT                        
+                        + "-RWB-" + AStarTree.RIGHT_WINDOW_BORDER_X                        
                         + ".csv");
 
                 if (log == null)
@@ -78,7 +81,7 @@ public class AgentBenchmarkMetacentrum {
                 FileWriter logWriter = new FileWriter(log);
 
                 logWriter.write("SS:" + AStarTree.SEARCH_STEPS + "\n");
-                logWriter.write("TTFW:" + AStarTree.TIME_TO_FINISH_WEIGHT + "\n");
+                logWriter.write("RWB:" + AStarTree.RIGHT_WINDOW_BORDER_X + "\n");
                 logWriter.write("level,win/fail,% travelled,run time,game ticks,planning time,total plannings,nodes evaluated,most backtracked nodes\n");
 
                 warmup(agentType);

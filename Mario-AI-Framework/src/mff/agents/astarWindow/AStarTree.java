@@ -25,6 +25,10 @@ public class AStarTree {
     static final float maxMarioSpeedX = 10.91f;
     static float exitTileX;
 
+    // Custom Vlada values for changing
+    public static int SEARCH_STEPS = 1;
+    public static int RIGHT_WINDOW_BORDER_X = 176;
+
     public int nodesEvaluated = 0;
 
     PriorityQueue<SearchNode> opened = new PriorityQueue<>(new CompareByCost());
@@ -37,7 +41,7 @@ public class AStarTree {
     	this.searchSteps = searchSteps;
 
     	marioXStart = startState.getMarioX();
-    	rightWindowBorderX = (int) (marioXStart + 176);
+    	rightWindowBorderX = (int) (marioXStart + RIGHT_WINDOW_BORDER_X);
     	//furthestNonEmptyRightX = findNonEmptyColumn(rightWindowBorderX, startState) * 16; // plan to this
 
         //  dont plan all the way to the border - to allow seeing new enemies soon enough
