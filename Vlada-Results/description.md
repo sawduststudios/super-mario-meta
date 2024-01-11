@@ -22,4 +22,8 @@ Right border window width in 48 96 124 150 176 200 224 248 272 296 320.
 
 That is 120 combinations in total. I have tried some smaller values than the default 176 but thought that it seems more interesting to make the window bigger. I have tested it on the first 15 original levels, first 100 krys levels, first 100 patternCount levels and first 100 notch levels.
 
-In the generated heatmaps ... TODO!
+In the generated heatmaps we can see that the higher the window the better the winrate. This is not very surprising, because the agent can see more of the level and therefore make better decisions. The search steps value does not seem to have a big impact on the winrate. The average run time is quite low for all combinations but lower values of search steps do seem to achieve lower run times, which again makes sense.
+
+## Graphs
+
+The graphs were generated using common-process.py and elective-process.py. The graphs show the average winrate and average run time for each combination of parameters. The graphs are saved in folders common-task-graphs and elective-task-graphs.
