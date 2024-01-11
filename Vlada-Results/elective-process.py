@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 
 # Specify the subfolder
-subfolder = "elective-data"
+subfolder = "window-data"
 
 # Get all CSV files in the specified subfolder
 files = glob.glob(os.path.join(subfolder, "*.csv"))
@@ -34,11 +34,11 @@ for file_index, file in enumerate(files):
         search_steps_value = int(ss_line.split(":")[-1])
         rbw_value = float(rbw_line.split(":")[-1])
 
-        if search_steps_value == 176 and search_steps_value == 6:
-            test_files_num += 1
-
         # Read the rest of the file as a CSV
         df = pd.read_csv(f)
+
+        # if rbw_value == 176 and search_steps_value == 6:
+        #     test_files_num += len(df["win/fail"])
 
     # add number of true values in "win/fail" column
     win_rate_data[search_steps.index(search_steps_value), right_border_window.index(rbw_value)] += df[
@@ -46,7 +46,7 @@ for file_index, file in enumerate(files):
     run_time_data[search_steps.index(search_steps_value), right_border_window.index(rbw_value)] += df[
         "run time"].sum()
 
-print(test_files_num)
+# print(test_files_num)
 # Calculate average win rate and run time
 win_rate_data /= total_runs
 run_time_data /= total_runs
