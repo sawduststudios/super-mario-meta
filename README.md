@@ -1,73 +1,35 @@
-### Introduction
-This project is based on the framework created by [Ahmed Khalifa](https://scholar.google.com/citations?user=DRcyg5kAAAAJ&hl=en), which can be found [here](https://github.com/amidos2006/Mario-AI-Framework). As a part of my bachelor thesis, I created a better forward model for this framework, and to prove its functionality, I built a few intelligent agents on top of it.
+# Description
 
-The work on this project was continued as a part of my diploma thesis, where I created even better agents, especially the `astarGrid` agent (also referred to as `MFF A* Grid`) and the `astarWaypoints` (`MFF A* Waypoints`) agent.
+## Common task
 
-### Requirements
-The framework works on Windows (tested on Win 10/11), but should also work on Linux (not tested). I tried to support different working directory settings of various IDEs. It is guaranteed to work with working directory set in the `Mario-AI-Framework` folder, which contains folders such as `src` and `levels`.  Java OpenJDK 17 might be required, but the framework probably runs on earlier versions too.
+In the common task I have tested all combinations for theese different values for parameters searchSteps and timeToFinishWeight.
 
-### Project overview
+Search Steps in 1 2 3 4 5 6 7 8 9 10 20.
+Time to finish weight in 0.20 0.40 0.60 0.80 1.00 1.20 1.40 1.60 1.80 2.00.
 
-- `agent-benchmark` - an output folder for agents' benchmark results (created by the program when a benchmark is run)
-- `img` - graphical assets of the game
-- `levels` - original, generated and test levels
-- `src` - source files of the framework
-  - `agents` - agents from the framework mostly created during competitions
-  - `engine` - original game implementation and forward model
-  - `levelGenerators`
-    -  generators from the framework mostly created during competitions
-    - the `krys` and `noiseBased` generators were created by MFF UK students Jan Holan and Mikuláš Hrdlička as a part of the Procedural Content Generation course
-  - `mff` - the source code of my theses
-    - `agents` - all the agents created for the theses + a benchmark environment for them; newly only contains the implementation of grid-level search
-    - `forwardmodel` - contains the two new forward models
-      - `slim` - which is an improved version of the original forward model
-      - `bin` - which is an experimental model that isn't finished
+That is 110 combinations in total. Each configuration was run on the first 15 original levels, first 15 krys levels and first 15 patternCount levels.
 
-### Experiment results
+I have tested it by accident on the astarGrid agent and not the simple astar agent, but the process is similar so atleast theese will be interesting to compare to what other students have found out about astar agent.
 
-Some of the experiment results (those that could be reasonably uploaded) are present in the ` Experiment-Results` folder.
+In the generated heatmaps we can see that the based on winrate the best parameter combinations are search steps value set to 2 or 3 and time to finish weight value between 1 and 2. Search steps 20 is bad, because the agent probably does not have enough time to do so many steps - because the average run time for 20 ss is quite low, compared with the low winrate this means that the agent probably died alot.
 
-### Interesting entry points
+## Elective task
 
-- `src/mff/HumanPlaytesting.java`, which allows you to play any level you want manually.
+I chose to experiment with the windowAstar agent. I have tested all combinations for theese different values for parameters searchSteps and rightBorderWindowWidth:
 
-- `src/mff/agents/common/AgentMain.java`, which shows how to set up and run various agents on a given level or a set of levels, including the `MFF A*`, `MFF A* Grid` and `MFF A* Waypoints` agents; it can also be used to ensure that the benchmark class correctly collects data.
+Search Steps in 1 2 3 4 5 6 7 8 9 10 20.
+Right border window width in 48 96 124 150 176 200 224 248 272 296 320.
 
-- `src/mff/agents/gridSearch/GridSearchMain.java`, which allows the visualisation of grid path.
+That is 120 combinations in total. I have tried some smaller values than the default 176 but thought that it seems more interesting to make the window bigger. I have tested it on the first 15 original levels, first 100 krys levels, first 100 patternCount levels and first 100 notch levels.
 
-- `src/mff/agents/benchmark/AgentBenchmarkMetacentrum.java`, which is used for the parameter search for `MFF A* Grid`, be warned that this class requires command line parameters, please refer to the `Parameter search` section before using this class.
+In the generated heatmaps we can see that the higher the window the better the winrate. This is not very surprising, because the agent can see more of the level and therefore make better decisions. The search steps value does not seem to have a big impact on the winrate. The average run time is quite low for all combinations but lower values of search steps do seem to achieve lower run times, which again makes sense.
 
-### How to run
+## Graphs and data
 
-In the `Mario-AI-Framework` folder, run:
+The graphs were generated using VLADA-RESULTS/common-process.py and VLADA-RESULTS/elective-process.py. The graphs show the average winrate and average run time for each combination of parameters. The graphs are saved in folders common-task-graphs and elective-task-graphs.
 
-- javac -cp src `your-desired-entry-point`
-  - e.g. javac -cp src src/mff/agents/common/AgentMain.java
+The data is stored in folders VLADA-RESULTS/common-data and VLADA-RESULTS/window-data.
 
-followed by:
+## Metacentrum scripts
 
-- java -cp src `your-desired-entry-point`.java
-  - e.g. java -cp src src/mff/agents/common/AgentMain.java
-
-this particular example runs the `MFF A* Waypoints` agent on the showcase maze level.
-
-### Parameter search
-
-As mentioned above, the `src/mff/agents/benchmark/AgentBenchmarkMetacentrum.java` class allows running the parameter search for `MFF A* Grid`, but the usage is not trivial.
-
-Before attempting to run the full search, be warned that it requires almost 1000 days of CPU time and approximately 2 real-time days (if run on MetaCentrum and with enough computational nodes available). It also generates so many output files that opening the folder with them has the potential to crash Windows File Explorer (if I remember correctly, it generated ~200 000 files).
-
-If you still want to rerun the experiment, run the `Metacentrum-Scripts/metascript-spec-grid.sh` script, uncommenting the `qsub` line, while having the `Metacentrum-Scripts/script-spec-grid.sh` script in the same folder. All of this should be done on the front node of some computational grid that supports the `qsub` command (e.g. MetaCentrum). The rest of the repository also needs to be present at a specific location, check (and update) the scripts if needed for this to match.
-
-If you want to run only a part of the experiment locally, just run the `AgentBenchmarkMetacentrum` class as any other and input the command line parameters that you wish to test. Keep in mind that the first four parameters of the agent are input like this, the last one is set in code, so you might need to change that.
-
-### Disclaimer
-
-The results that you obtain while running experiments might differ from the ones stated in our works. The reason is that the agents' performance is influenced by the hardware capabilities that they are run on. To obtain interpretable results, make sure to run all agents that you compare on the same hardware, the relative results should stay the same.
-
-### Copyrights
-This framework is not endorsed by Nintendo and is only intended for research purposes. Mario is a Nintendo character which the authors don't own any rights to. Nintendo is also the sole owner of all the graphical assets in the game. Any use of this framework is expected to be on a non-commercial basis. The framework updates were created by David Šosvald as a bachelor and a master thesis at the Faculty of Mathematics and Physics of Charles University. The framework was created by [Ahmed Khalifa](https://scholar.google.com/citations?user=DRcyg5kAAAAJ&hl=en), based on the original Mario AI Framework by [Sergey Karakovskiy](https://scholar.google.se/citations?user=6cEAqn8AAAAJ&hl=en), [Noor Shaker](https://scholar.google.com/citations?user=OK9tw1AAAAAJ&hl=en), and [Julian Togelius](https://scholar.google.com/citations?user=lr4I9BwAAAAJ&hl=en), which in turn was based on [Infinite Mario Bros](https://fantendo.fandom.com/wiki/Infinite_Mario_Bros.) by Markus Persson.
-
-### Contact
-
-In case of any problems, questions, or suggestions, feel free to contact me at <david.sosvald@email.cz>.
+The scripts used are in the metacentrum scripts original folder.

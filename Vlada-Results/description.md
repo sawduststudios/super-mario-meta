@@ -24,6 +24,12 @@ That is 120 combinations in total. I have tried some smaller values than the def
 
 In the generated heatmaps we can see that the higher the window the better the winrate. This is not very surprising, because the agent can see more of the level and therefore make better decisions. The search steps value does not seem to have a big impact on the winrate. The average run time is quite low for all combinations but lower values of search steps do seem to achieve lower run times, which again makes sense.
 
-## Graphs
+## Graphs and data
 
-The graphs were generated using common-process.py and elective-process.py. The graphs show the average winrate and average run time for each combination of parameters. The graphs are saved in folders common-task-graphs and elective-task-graphs.
+The graphs were generated using VLADA-RESULTS/common-process.py and VLADA-RESULTS/elective-process.py. The graphs show the average winrate and average run time for each combination of parameters. The graphs are saved in folders common-task-graphs and elective-task-graphs.
+
+The data is stored in folders VLADA-RESULTS/common-data and VLADA-RESULTS/window-data.
+
+## Metacentrum scripts
+
+The scripts used are in the metacentrum scripts original folder.
